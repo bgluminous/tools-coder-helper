@@ -6,9 +6,7 @@
 
 **注意事项:**
 > 如果要使用枚举解析 则需要把列 **注释** 写成以下格式  
-> ```type VARCHAR(20) NOT NULL COMMENT '类型 XxxxType'```
->
-> 请勿在注释中添加其他空格本工具使用空格解析枚举定义 (TODO: 修改枚举标识符)
+> ```type VARCHAR(20) NOT NULL COMMENT '类型 #枚举类名#'```
 
 主入口:
 

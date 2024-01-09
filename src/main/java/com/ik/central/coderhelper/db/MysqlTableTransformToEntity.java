@@ -16,6 +16,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 把数据库的表转换为对应的实体类, 同时包含注释和私有枚举类的支持。
@@ -268,12 +270,12 @@ public class MysqlTableTransformToEntity {
    */
   private static ProcessedColTypeBo processColType(TableColMetaPo meta) {
     // 判断是否为Enum
-    int commentIncludeEnum = meta.getComment().indexOf(" ");
-    if (commentIncludeEnum != -1) {
-      String typeClassName = meta.getComment().substring(commentIncludeEnum + 1);
+    Matcher matcher = Pattern.compile("#([a-zA-Z]{0,100})#").matcher(meta.getComment());
+    if (matcher.find()) {
+      String matched = matcher.group(1);
       return new ProcessedColTypeBo()
-        .setAddImportStr("import %s.%s;".formatted(settings.getTypePackageFullName(), typeClassName))
-        .setTypeStr(typeClassName + " ");
+        .setAddImportStr("import %s.%s;".formatted(settings.getTypePackageFullName(), matched))
+        .setTypeStr(matched);
     }
     // 为基础类型
     ProcessedColTypeBo processedColTypeBo = new ProcessedColTypeBo();
