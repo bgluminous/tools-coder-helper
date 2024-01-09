@@ -158,17 +158,24 @@ public class MysqlTableTransformToEntity {
         statement1.setString(2, settings.getDatabaseName());
         ResultSet rs = statement.executeQuery();
         ResultSet rs1 = statement1.executeQuery();
+        Map<String, String> commentMap = new HashMap<>();
+        while (rs1.next()) {
+          commentMap.put(
+            rs1.getString("COLUMN_NAME"), rs1.getString("COLUMN_COMMENT")
+          );
+        }
         List<TableColMetaPo> tableColMetaList = new ArrayList<>();
-        while (rs.next() && rs1.next()) {
+        while (rs.next()) {
+          String colName = rs.getString("Field");
           tableColMetaList.add(
             new TableColMetaPo()
-              .setName(rs.getString("Field"))
+              .setName(colName)
               .setType(rs.getString("Type"))
               .setAllowNull(rs.getString("Null"))
               .setKey(rs.getString("Key"))
               .setDefaultData(rs.getString("Default"))
               .setExtra(rs.getString("Extra"))
-              .setComment(rs1.getString("COLUMN_COMMENT"))
+              .setComment(commentMap.get(colName))
           );
         }
         v.setColData(tableColMetaList);
