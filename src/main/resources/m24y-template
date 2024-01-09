@@ -1,0 +1,11 @@
+package #package#
+
+#import#
+
+#importNative#
+
+#classDoc#
+#lombokAnno#
+public class #className# {
+#colData#
+}
