@@ -1,0 +1,4 @@
+arkLog:
+  path: /logs
+  filePrefix: tools-code-helper
+  detail: "{INF:TTF}{DEB:TTF}{WAR:TTF}{ERR:TTF}{VER:TTF}{FAL:TTF}"
