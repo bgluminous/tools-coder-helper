@@ -21,7 +21,7 @@ import java.util.*;
  * 把数据库的表转换为对应的实体类, 同时包含注释和私有枚举类的支持。
  *
  * @author BGLuminous
- * @since 1.0.0 20247-01-09
+ * @since 1.0.0 2024-01-09
  */
 public class MysqlTableTransformToEntity {
   private static final Logger LOGGER = LogFactory.getLogger(MysqlTableTransformToEntity.class);
